@@ -11,7 +11,7 @@ public class VancouverBusSystem {
     }
 
     public void findStopInfo(String stop){
-        System.out.println("Test1");
+        System.out.println("Test2");
 
     }
 
