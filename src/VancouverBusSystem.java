@@ -11,7 +11,8 @@ public class VancouverBusSystem {
     }
 
     public void findStopInfo(String stop){
-        System.out.println("Test");
+        System.out.println("Test1");
+
     }
 
     public void findTripsWithArrivalTime(Time arrivalTime){
