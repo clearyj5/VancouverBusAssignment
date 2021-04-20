@@ -48,6 +48,10 @@ public class VancouverBusSystem {
             e.printStackTrace();
           }
 
+          System.out.println("Test"); //Pc 2
+
+
+
 
   
     }
