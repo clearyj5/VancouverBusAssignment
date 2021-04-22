@@ -25,30 +25,92 @@ public class VancouverBusSystem {
 
     }
 
-    public void findTripsWithArrivalTime(Time arrivalTime){
-        
+    public void findTripsWithArrivalTime(String arrivalTime){
+
+      String tHour= arrivalTime.split("\\,")[0];
+      String tMinute = arrivalTime.split("\\,") [1];
+      String tSecond = arrivalTime.split("\\,")[2];
+
+     
+/*
+
+trip object has array of  41 stops, 41 stop times, trip id, distance 
+place all trips in an array List, sort by trip id n/40 log n 
+
+
+*/
+
+
+
+
+
+       
+    }
+
+    public boolean isBefore(String time1, String time2) {
+
+      //returns true if time1 is before time2 and false otherwise
+
+      String tHour1= time1.split("\\:")[0];
+      String tMinute1 = time1.split("\\:") [1];
+      String tSecond1 = time1.split("\\:")[2];
+
+      String tHour2= time2.split("\\:")[0];
+      String tMinute2 = time2.split("\\:") [1];
+      String tSecond2 = time2.split("\\:")[2];
+
+      if (Integer.parseInt(tHour1) < Integer.parseInt(tHour2)){
+        return true;
+      }
+      else if (Integer.parseInt(tHour1) == Integer.parseInt(tHour2)){
+        if (Integer.parseInt(tMinute1) < Integer.parseInt(tMinute2)){
+          return true;
+        }
+        else if (Integer.parseInt(tMinute1) == Integer.parseInt(tMinute2)){
+          if (Integer.parseInt(tSecond1) < Integer.parseInt(tSecond2)){
+            return true;
+          }
+
+        }
+      }
+
+
+  return false;
+
+    }
+
+
+    public void BinarySearchTimes(String time){
+
+      //return the line number of the time
+
+
+
+
+
+
+    }
+
+    public boolean isValidTime(String time){
+
+      String hour = arrivalTime.split("\\:")[0];
+      String minutes = arrivalTime.split("\\:") [1];
+      String seconds = arrivalTime.split("\\:")[2];
+
+
+
+
     }
 
     public static void main(String[] args) throws Exception {
         System.out.println("Welcome to Vancouver Bus System");
 
-        System.out.println("Testing pull request and merge to master branch"); //PC
+
+          VancouverBusSystem vbs = new VancouverBusSystem();
+
+         System.out.println(vbs.isBefore("14:20:13", "14:20:15"));
 
 
-        try {
-            File myObj = new File("stops.txt");
-            Scanner myReader = new Scanner(myObj);
-            while (myReader.hasNextLine()) {
-              String data = myReader.nextLine();
-              System.out.println(data);
-            }
-            myReader.close();
-          } catch (FileNotFoundException e) {
-            System.out.println("An error occurred.");
-            e.printStackTrace();
-          }
-
-          System.out.println("Test"); //Pc 2
 
 
 
