@@ -5,62 +5,62 @@ import java.util.Scanner;
 
 public class Trip {
 
-   public int tripId;
-   public String [] times;
-   public String [] stopIds;
-   public int [] distances;
-
+   public ArrayList<Integer> tripId = new ArrayList<Integer>();
+   public  ArrayList<String> times = new ArrayList<String>();
+   public ArrayList<Integer> stopIds = new ArrayList<Integer>();
+   public ArrayList<Double> distances = new ArrayList<Double>();
    public final int N_OF_STOPS = 41;
 
-   ArrayList<Trip> tripList = new ArrayList<Trip>();
-   
-    Trip(String filename){
 
+     Trip(String filename){
 
         try{
 
             Scanner inputScanner = new Scanner(new File(filename));
-
-            int stopCounter =0;
-            //skip line with headers
+            //skip first line
             inputScanner.nextLine();
+          
 
-            while (inputScanner.hasNextLine()){
+           while (inputScanner.hasNextLine()){
 
-                stopCounter++;
+                String line1 = inputScanner.nextLine();
+                String line = line1;
+    
+                String time = line1.split("\\,")[1];
+                String hourWord= time.split("\\:")[0];
+                hourWord = hourWord.trim();
+                int hour = Integer.parseInt(hourWord);
 
-                if (stopCounter == 41){
-                    tripList.add(this);
-                    stopCounter =0;
+                if (hour <=24){
+                    this.tripId.add(Integer.parseInt((line.split("\\,") [0])));
+                    this.times.add(time);
+                    this.stopIds.add(Integer.parseInt((line.split("\\,") [3])));
+
+                    if (Integer.parseInt(line.split("\\,")[4]) == 1) {
+                        this.distances.add(Double.parseDouble((line.split("\\,") [7])));
+                    }
+                    else {
+                        this.distances.add(Double.parseDouble((line.split("\\,") [8])));
+                    }
                 }
 
-                String line = inputScanner.nextLine();
-                this.tripId = Integer.parseInt(line.split("\\,")[0]);
-                
-
-                for (int index=0; index < 41; index++){
-
-                this.times[index] = line.split("\\,")[1];
-                this.stopIds[index] = line.split("\\,")[3];
-                
-                if (stopCounter == 0){
-                    this.stopIds[index] = line.split("\\,")[7];
+                else if (inputScanner.hasNextLine()){
                 }
+
                 else {
-                    this.stopIds[index] = line.split("\\,")[8];
-                }
-
-                line = inputScanner.nextLine();
+                        System.out.println(line1);
+                    }
 
                 }
-            }
-
-        } catch (FileNotFoundException e){
-            System.out.println("file not found");
-        
+          
 
 
-
+          inputScanner.close();
+            
+        } catch (FileNotFoundException e)
+        {
     }
     
 }
+}
+

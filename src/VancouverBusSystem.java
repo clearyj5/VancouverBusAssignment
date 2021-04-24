@@ -1,10 +1,11 @@
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.sql.Time;
-import java.util.Scanner;
+
+import java.util.ArrayList;
+
 
 
 public class VancouverBusSystem {
+
+  ArrayList<Trip> tripList = new ArrayList<Trip>();
     
     public void findShortestRoute(String stop1, String stop2){
 
@@ -17,23 +18,7 @@ public class VancouverBusSystem {
 
     public void findTripsWithArrivalTime(String arrivalTime){
 
-      String tHour= arrivalTime.split("\\,")[0];
-      String tMinute = arrivalTime.split("\\,") [1];
-      String tSecond = arrivalTime.split("\\,")[2];
-
-     
-/*
-
-trip object has array of  41 stops, 41 stop times, trip id, distance 
-place all trips in an array List, sort by trip id n/40 log n 
-
-
-*/
-
-
-
-
-
+   
        
     }
 
@@ -81,31 +66,45 @@ place all trips in an array List, sort by trip id n/40 log n
 
     }
 
-    public boolean isValidTime(String time){
+    /* this method will store all the data in stop_times, into a data structure 
+    *
+    * Each trip, (group of 41 stops will be added to a global variable tripList)
+    * Each trip will be an object in itself
+    *
+    *
+    *
+    */
 
-      String hour = arrivalTime.split("\\:")[0];
-      String minutes = arrivalTime.split("\\:") [1];
-      String seconds = arrivalTime.split("\\:")[2];
-
-
-
+    public void loadStopTimes(){
 
     }
+
+  
+
+    public boolean isValidTime(String time){
+
+
+      return false;
+    }
+
 
     public static void main(String[] args) throws Exception {
         System.out.println("Welcome to Vancouver Bus System");
 
 
-          VancouverBusSystem vbs = new VancouverBusSystem();
 
-         System.out.println(vbs.isBefore("14:20:13", "14:20:15"));
+          Trip tester= new Trip("stop_times.txt");
+
+         for (int index =0; index<tester.distances.size(); index++){
+
+          System.out.println(tester.distances.get(index) + " " + tester.stopIds.get(index));
+          
+         }
 
 
+         
+         }
 
 
-
-
-  
-    }
-
+    
 }
