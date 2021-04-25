@@ -30,6 +30,80 @@ public class VancouverBusSystem {
 
     }
 
+    public void showMenu() {
+      boolean shouldContinue = true;
+      Scanner sc = new Scanner(System.in);
+      do{
+          
+          System.out.println("Choose one of the following options: ");
+          System.out.println("1. Press 1 to shortest path");
+          System.out.println("2. Press 2 to find by bus stop full name");
+          System.out.println("3. Press 3 to find All trips for given time");
+          System.out.println("4. Press 3 to quit");
+          int inputFromUser = -1;
+          try {
+              inputFromUser = Integer.parseInt(sc.nextLine());
+          } catch(Exception e) {
+              // Ignore exception, as user will try again!!
+              inputFromUser = -1;
+          }
+          switch(inputFromUser){
+              case 1:
+                  System.out.print("Enter stop 1 name: ");
+                  String stop1  = sc.nextLine();
+                  System.out.print("Enter stop 2 name: ");
+                  String stop2 = sc.nextLine();
+                  findShortestRoute(stop1, stop2);
+                  break;
+              case 2:
+              System.out.print("Enter stop name to search: ");
+              String stop = sc.nextLine();
+              findStopInfo(stop);
+                  break;
+              case 3:
+                System.out.print("Enter time to search in hh:mm::ss format: ");
+                String timeByUser = sc.nextLine();
+                boolean isTimeValid = _isGivenTimeValid(timeByUser);
+                if(isTimeValid) {
+                  BinarySearchTimes(timeByUser);
+                } else {
+                  System.out.print("Invalid time entered, try again!!");
+                }
+                
+                  break;
+              case 4:
+                  shouldContinue = false;
+                  break;
+              default:
+              System.out.println("Invalid Input, try again!!");
+          }
+      } while(shouldContinue);
+
+  }
+
+  private boolean _isGivenTimeValid(String t) {
+    boolean timeValid = true;
+    try {
+      String [] hhmmss = t.split(":");
+    
+      if(hhmmss.length < 3) {
+        timeValid = false;
+      }
+
+      int h = Integer.parseInt(hhmmss[0]);
+      int m = Integer.parseInt(hhmmss[1]);
+      int s = Integer.parseInt(hhmmss[2]);
+      if(h >23 || h < 0) {
+        timeValid = false;
+      }
+      if(m < 0 || s < 0 || m > 59 || s > 59) {
+        timeValid = false;
+      }
+    } catch(Exception e) {
+      timeValid = false;
+    }
+    return timeValid;
+  }
     public void findTripsWithArrivalTime(String arrivalTime){
 
    
@@ -107,7 +181,10 @@ public class VancouverBusSystem {
 
 
 
+
           Trip tester= new Trip("stop_times.txt");
+          VancouverBusSystem v = new VancouverBusSystem();
+          v.showMenu();
 
          for (int index =0; index<tester.distances.size(); index++){
 
