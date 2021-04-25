@@ -39,7 +39,7 @@ public class VancouverBusSystem {
           System.out.println("1. Press 1 to shortest path");
           System.out.println("2. Press 2 to find by bus stop full name");
           System.out.println("3. Press 3 to find All trips for given time");
-          System.out.println("4. Press 3 to quit");
+          System.out.println("4. Press 4 to quit");
           int inputFromUser = -1;
           try {
               inputFromUser = Integer.parseInt(sc.nextLine());
@@ -178,13 +178,13 @@ public class VancouverBusSystem {
 
     public static void main(String[] args) throws Exception {
         System.out.println("Welcome to Vancouver Bus System");
-
+        VancouverBusSystem v = new VancouverBusSystem();
+        v.showMenu();
 
 
 
           Trip tester= new Trip("stop_times.txt");
-          VancouverBusSystem v = new VancouverBusSystem();
-          v.showMenu();
+          
 
          for (int index =0; index<tester.distances.size(); index++){
 
