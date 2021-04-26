@@ -5,14 +5,14 @@ import java.lang.*;
 public class ReadFile {
 
   public static String[] keyArray = new String[8758];
-  //public static String[] valueArray = new String[70057];
+  // public static String[] valueArray = new String[70057];
 
   public static void keyArray(String s, int i) {
     keyArray[i] = s;
   }
 
   // public static void valueArray(String s, int i) {
-  //   valueArray[i] = s;
+  // valueArray[i] = s;
   // }
 
   /*
@@ -45,6 +45,25 @@ public class ReadFile {
   }
 
   /*
+  *Edits the position of the words in the keys
+  *by turning the strings into an element in an array and moving it
+  */
+  public String editString(String string) {
+    int index = string.indexOf("WB");
+    String[] aux = string.split(" ");
+    String temp = aux[index];
+    String temp2;
+    for (int i = 1; i < aux.length; i++) {
+      aux[i] = aux[i - 1];
+    }
+    int length = aux.length - 1;
+    aux[length] = temp;
+    String appended = Arrays.toString(aux);
+
+    return appended;
+  }
+
+  /*
    * Takes all the information of the bus stops and places them into an array
    * 
    * @param File the stops.txt file returns the array with all the stops info
@@ -60,25 +79,24 @@ public class ReadFile {
 
       while (myReader.hasNextLine()) {
         String data = myReader.nextLine();
+        if (data.contains("WB ")) {
+          editString(data);
+        }
+        if (data.contains("FLAGSTOP ")) {
+          editString(data);
+        }
+        if (data.contains("NB ")) {
+          editString(data);
+        }
+        if (data.contains("SB ")) {
+          editString(data);
+        }
+        if (data.contains("EB ")) {
+          editString(data);
+        }
         value[valuei] = data;
         valuei++;
 
-        // valueArray(value[0], valuei);
-        // valuei++;
-        // valueArray(value[1], valuei);
-        // valuei++;
-        // valueArray(value[3], valuei);
-        // valuei++;
-        // valueArray(value[4], valuei);
-        // valuei++;
-        // valueArray(value[5], valuei);
-        // valuei++;
-        // valueArray(value[6], valuei);
-        // valuei++;
-        // valueArray(value[7], valuei);
-        // valuei++;
-        // valueArray(value[8], valuei);
-        // valuei++;
       }
       myReader.close();
     } catch (FileNotFoundException e) {
