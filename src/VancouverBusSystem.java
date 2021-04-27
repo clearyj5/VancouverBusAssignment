@@ -1,7 +1,15 @@
 
+
+
+
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.ImageIcon; 
 import java.util.ArrayList;
 import java.io.*;
 import java.util.*;
+
+
 
 public class VancouverBusSystem {
 
@@ -21,38 +29,114 @@ public class VancouverBusSystem {
      * 
      * -> trie(DST) key is names of the stops, value is the description
      */
-    System.out.println("Test2");
 
-  }
 
-  public void findTripsWithArrivalTime(Time arrivalTime) {
 
-  }
+    public void showMenu() {
+      boolean shouldContinue = true;
+      Scanner sc = new Scanner(System.in);
+      do{
 
-  public static void main(String[] args) throws Exception {
-    System.out.println("Welcome to Vancouver Bus System");
+        String[] userOptions = 
+        {"Please choose an option", 
+        "1. Find the shortest path between two stops", 
+        "2. Find bus stop by full name", 
+        "3. Find all the trips of a given duration"}; 
 
-    System.out.println("Testing pull request and merge to master branch"); // PC
+        JFrame frame = new JFrame();
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setVisible(true);
+        frame.setSize(420,420);
 
+        ImageIcon icon = new ImageIcon("/Users/probbins/Desktop/bluebus.jpeg"); 
+
+        String inputFromUser = (String) JOptionPane.showInputDialog(
+
+          frame, 
+          "Which of Our Services Would You Like To Use? Select an Option From The Dropdown Menu", 
+          "*Vancouver Bus Service", 
+          JOptionPane.WARNING_MESSAGE, 
+          icon, 
+          userOptions, 
+          userOptions[0]
+          );
+
+          switch(inputFromUser){
+              case "1. Find the shortest path between two stops":
+                String stop1 = JOptionPane.showInputDialog("Please enter the first stop"); 
+                String stop2 = JOptionPane.showInputDialog("Please enter the second stop"); 
+                  findShortestRoute(stop1, stop2);
+                  break;
+              case "2. Find bus stop by full name":
+              String stop = JOptionPane.showInputDialog("Please enter the stop name to search"); 
+              findStopInfo(stop);
+                  break;
+              case "3. Find all the trips of a given duration":
+                String timeByUser = JOptionPane.showInputDialog("Please enter the durtion of your trip in a hh:mm::ss format: ");
+                boolean isTimeValid = _isGivenTimeValid(timeByUser);
+                if(isTimeValid) {
+                  BinarySearchTimes(timeByUser);
+                } else {
+                  System.out.print("Invalid time entered, try again!!");
+                }
+                
+                default:
+              System.out.println("Invalid Input, try again!!");
+          }
+      } while(shouldContinue);
+
+  }; 
+
+  private boolean _isGivenTimeValid(String t) {
+    boolean timeValid = true;
     try {
-      File myObj = new File("stops.txt");
-      Scanner myReader = new Scanner(myObj);
-      while (myReader.hasNextLine()) {
-        String data = myReader.nextLine();
-        System.out.println(data);
+      String [] hhmmss = t.split(":");
+    
+      if(hhmmss.length < 3) {
+        timeValid = false;
       }
-      myReader.close();
-    } catch (FileNotFoundException e) {
-      System.out.println("An error occurred.");
-      e.printStackTrace();
+
+      int h = Integer.parseInt(hhmmss[0]);
+      int m = Integer.parseInt(hhmmss[1]);
+      int s = Integer.parseInt(hhmmss[2]);
+      if(h >23 || h < 0) {
+        JOptionPane.showMessageDialog(null, "Invalid hours, it should be >=0 and <=23 ");
+        timeValid = false;
+      }
+      if(m < 0 ||  m > 59) {
+        JOptionPane.showMessageDialog(null, "Invalid mins, it should be >=0 and <=59 ");
+        timeValid = false;
+      } if(s < 0 || s > 59) {
+        JOptionPane.showMessageDialog(null, "Invalid seconds, it should be >=0 and <=59 ");
+        timeValid = false;
+      }
+    } catch(Exception e) {
+      timeValid = false;
     }
-
-    System.out.println("Test"); // Pc 2
-
+    return timeValid;
   }
+ 
 
 
-         
+
+
+
+    public static void main(String[] args) throws Exception {
+        System.out.println("Welcome to Vancouver Bus System");
+        VancouverBusSystem v = new VancouverBusSystem();
+        v.showMenu();
+
+
+
+          Trip tester= new Trip("stop_times.txt");
+          
+
+         for (int index =0; index<tester.distances.size(); index++){
+
+          System.out.println(tester.distances.get(index) + " " + tester.stopIds.get(index));
+          
+         }
+
 
 
          
