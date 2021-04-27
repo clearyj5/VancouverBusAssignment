@@ -5,6 +5,9 @@ import java.io.FileNotFoundException;
 import java.sql.Time;
 import java.util.*;
 
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.ImageIcon; 
 
 
 public class VancouverBusSystem {
@@ -34,35 +37,43 @@ public class VancouverBusSystem {
       boolean shouldContinue = true;
       Scanner sc = new Scanner(System.in);
       do{
-          
-          System.out.println("Choose one of the following options: ");
-          System.out.println("1. Press 1 to shortest path");
-          System.out.println("2. Press 2 to find by bus stop full name");
-          System.out.println("3. Press 3 to find All trips for given time");
-          System.out.println("4. Press 4 to quit");
-          int inputFromUser = -1;
-          try {
-              inputFromUser = Integer.parseInt(sc.nextLine());
-          } catch(Exception e) {
-              // Ignore exception, as user will try again!!
-              inputFromUser = -1;
-          }
+
+        String[] userOptions = 
+        {"Please choose an option", 
+        "1. Find the shortest path between two stops", 
+        "2. Find bus stop by full name", 
+        "3. Find all the trips of a given duration"}; 
+
+        JFrame frame = new JFrame();
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setVisible(true);
+        frame.setSize(420,420);
+
+        ImageIcon icon = new ImageIcon("/Users/probbins/Desktop/bluebus.jpeg"); 
+
+        String inputFromUser = (String) JOptionPane.showInputDialog(
+
+          frame, 
+          "Which of Our Services Would You Like To Use? Select an Option From The Dropdown Menu", 
+          "*Vancouver Bus Service", 
+          JOptionPane.WARNING_MESSAGE, 
+          icon, 
+          userOptions, 
+          userOptions[0]
+          );
+
           switch(inputFromUser){
-              case 1:
-                  System.out.print("Enter stop 1 name: ");
-                  String stop1  = sc.nextLine();
-                  System.out.print("Enter stop 2 name: ");
-                  String stop2 = sc.nextLine();
+              case "1. Find the shortest path between two stops":
+                String stop1 = JOptionPane.showInputDialog("Please enter the first stop"); 
+                String stop2 = JOptionPane.showInputDialog("Please enter the second stop"); 
                   findShortestRoute(stop1, stop2);
                   break;
-              case 2:
-              System.out.print("Enter stop name to search: ");
-              String stop = sc.nextLine();
+              case "2. Find bus stop by full name":
+              String stop = JOptionPane.showInputDialog("Please enter the stop name to search"); 
               findStopInfo(stop);
                   break;
-              case 3:
-                System.out.print("Enter time to search in hh:mm::ss format: ");
-                String timeByUser = sc.nextLine();
+              case "3. Find all the trips of a given duration":
+                String timeByUser = JOptionPane.showInputDialog("Please enter the durtion of your trip in a hh:mm::ss format: ");
                 boolean isTimeValid = _isGivenTimeValid(timeByUser);
                 if(isTimeValid) {
                   BinarySearchTimes(timeByUser);
@@ -70,16 +81,12 @@ public class VancouverBusSystem {
                   System.out.print("Invalid time entered, try again!!");
                 }
                 
-                  break;
-              case 4:
-                  shouldContinue = false;
-                  break;
-              default:
+                default:
               System.out.println("Invalid Input, try again!!");
           }
       } while(shouldContinue);
 
-  }
+  }; 
 
   private boolean _isGivenTimeValid(String t) {
     boolean timeValid = true;
@@ -94,9 +101,14 @@ public class VancouverBusSystem {
       int m = Integer.parseInt(hhmmss[1]);
       int s = Integer.parseInt(hhmmss[2]);
       if(h >23 || h < 0) {
+        JOptionPane.showMessageDialog(null, "Invalid hours, it should be >=0 and <=23 ");
         timeValid = false;
       }
-      if(m < 0 || s < 0 || m > 59 || s > 59) {
+      if(m < 0 ||  m > 59) {
+        JOptionPane.showMessageDialog(null, "Invalid mins, it should be >=0 and <=59 ");
+        timeValid = false;
+      } if(s < 0 || s > 59) {
+        JOptionPane.showMessageDialog(null, "Invalid seconds, it should be >=0 and <=59 ");
         timeValid = false;
       }
     } catch(Exception e) {
