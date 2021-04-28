@@ -153,6 +153,11 @@ public class TripTwo {
 			System.out.println(t2.findTripsWithArrivalTime("23:51:11").get(index));
 		}
 
+		/*
+		VancouverBusSystem v = new VancouverBusSystem();
+        v.showMenu(t2);
+
+		*/ 
 
 		ArrayList<String> keys = new ArrayList<String>();
 
@@ -177,8 +182,4 @@ public class TripTwo {
 
 		System.out.println(max + " " + sum/keys.size());
 
-
-
-
-	}
 }
