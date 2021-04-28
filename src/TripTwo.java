@@ -177,6 +177,11 @@ public class TripTwo {
 			System.out.println(t2.findTripsWithArrivalTime("23:51:48").get(index));
 		}
 
+		/*
+		VancouverBusSystem v = new VancouverBusSystem();
+        v.showMenu(t2);
+
+		*/ 
 
 	}
 }
