@@ -1,7 +1,4 @@
 
-
-
-
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.ImageIcon; 
@@ -128,20 +125,10 @@ public class VancouverBusSystem {
 
 
 
-          Trip tester= new Trip("stop_times.txt");
-          
-
-         for (int index =0; index<tester.distances.size(); index++){
-
-          System.out.println(tester.distances.get(index) + " " + tester.stopIds.get(index));
-          
-         }
-
-
-
+      
          
          }
 
 
     
-
+        }

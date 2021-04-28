@@ -5,22 +5,16 @@ import java.lang.*;
 public class ReadFile {
 
   public static String[] keyArray = new String[8758];
-  // public static String[] valueArray = new String[70057];
+
+  //would you consider using an array list here instead, since if anymore bus stops are added the program will not work
+  //With an arrayList you dont have to specify size in advance
+  
 
   public static void keyArray(String s, int i) {
     keyArray[i] = s;
   }
 
-  // public static void valueArray(String s, int i) {
-  // valueArray[i] = s;
-  // }
-
-  /*
-   * Takes all the adrress of the bus stops and places them into an array
-   * 
-   * @param File the stops.txt file returns the array with all the stops address
-   * catches file not found error
-   */
+  
   public String[] keyArray(File file) {
     try {
 
@@ -103,6 +97,8 @@ public class ReadFile {
       System.out.println("An error occurred.");
       e.printStackTrace();
     }
+
+  
     for (int i = 0; i < 8758; i++) {
       System.out.println(value[i]);
     }

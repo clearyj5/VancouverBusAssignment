@@ -157,7 +157,7 @@ public class TST<Value> {
             String currentValue;
             currentValue = valueArray[i];
 
-            put( currentValue, currentKey);
+            put(currentValue, currentKey);
         
         }
     }
