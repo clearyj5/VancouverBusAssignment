@@ -148,9 +148,36 @@ public class TripTwo {
 
 		TripTwo t2 = new TripTwo("stop_times.txt");
 
+
 		for (int index =0; index<t2.findTripsWithArrivalTime("23:51:11").size(); index++){
 			System.out.println(t2.findTripsWithArrivalTime("23:51:11").get(index));
 		}
+
+
+		ArrayList<String> keys = new ArrayList<String>();
+
+		for (String key: tripDataSet.keySet()) {
+			keys.add(key);
+		}
+
+		int max =0;
+		int temp =0;
+		int sum=0;
+
+		for (int index = 0; index<keys.size(); index++){
+
+			temp = tripDataSet.get(keys.get(index)).size();
+			sum += temp;
+
+
+			if (temp>max){
+				max = temp;
+			}
+		}
+
+		System.out.println(max + " " + sum/keys.size());
+
+
 
 
 	}
