@@ -1,7 +1,4 @@
 
-
-
-
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.ImageIcon; 
@@ -123,7 +120,6 @@ public class VancouverBusSystem {
         VancouverBusSystem v = new VancouverBusSystem();
         v.showMenu(t2);
 
-
 /*
         TripTwo tester= new TripTwo("stop_times.txt");
           
@@ -135,10 +131,5 @@ public class VancouverBusSystem {
          }
 
 */
-
          
          }
-
-
-        }
-
