@@ -10,6 +10,7 @@ import java.util.*;
 
 public class VancouverBusSystem {
 
+
   public ArrayList<String> findShortestRoute(String stop1, String stop2) {
     ArrayList<String> result = new ArrayList<String>();
     result.add(stop1);
@@ -18,6 +19,7 @@ public class VancouverBusSystem {
   }
 
   public ArrayList<String> findStopInfo(String stop) {
+
     /*
      * Searching for a bus stop by full name or by the first few characters in the
      * name, using a ternary search tree (TST), returning the full stop information
@@ -30,6 +32,7 @@ public class VancouverBusSystem {
      * -> trie(DST) key is names of the stops, value is the description
      */
 
+
     ArrayList<String> result = new ArrayList<String>();
     result.add(stop);
     //result.add(stop2);
@@ -38,6 +41,7 @@ public class VancouverBusSystem {
   }
 
     public void showMenu(TripTwo tt) {
+
       boolean shouldContinue = true;
       Scanner sc = new Scanner(System.in);
       do{
@@ -53,7 +57,9 @@ public class VancouverBusSystem {
         frame.setVisible(true);
         frame.setSize(420,420);
 
+
         //ImageIcon icon = new ImageIcon("/Users/probbins/Desktop/bluebus.jpeg"); 
+
 
         String inputFromUser = (String) JOptionPane.showInputDialog(
 
@@ -61,7 +67,9 @@ public class VancouverBusSystem {
           "Which of Our Services Would You Like To Use? Select an Option From The Dropdown Menu", 
           "*Vancouver Bus Service", 
           JOptionPane.WARNING_MESSAGE, 
+
           null, 
+
           userOptions, 
           userOptions[0]
           );
@@ -70,6 +78,7 @@ public class VancouverBusSystem {
               case "1. Find the shortest path between two stops":
                 String stop1 = JOptionPane.showInputDialog("Please enter the first stop"); 
                 String stop2 = JOptionPane.showInputDialog("Please enter the second stop"); 
+
                   ArrayList<String> resultShortesRoute = findShortestRoute(stop1, stop2);
                   String resultsshortest = "";
                   for(String s : resultShortesRoute) {
@@ -96,10 +105,12 @@ public class VancouverBusSystem {
                     resultToShow += s + "\n";
                   }
                 JOptionPane.showMessageDialog(frame, resultToShow);
+
                 default:
               System.out.println("Invalid Input, try again!!");
           }
       } while(shouldContinue);
+
 
   }
 
@@ -132,3 +143,4 @@ public class VancouverBusSystem {
          
         }
       }
+
