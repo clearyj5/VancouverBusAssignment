@@ -95,7 +95,48 @@ public class TripTwo {
 		else {
 			tripsWithArrivalTime.add("the input '" + arrivalTime + "' is not a valid time" );
 		}
-		return tripsWithArrivalTime;
+		return formatOutput(tripsWithArrivalTime, arrivalTime);
+	}
+
+
+	public ArrayList<String> formatOutput(ArrayList<String> tripsWithArrivalTime, String arrivalTime){
+
+		if (tripsWithArrivalTime.get(0).equals("No buses depart at the specified time") || 
+		tripsWithArrivalTime.equals("the input '" + arrivalTime + "' is not a valid time" )){
+			return tripsWithArrivalTime;
+		}
+
+		ArrayList<String> output = new ArrayList<String>();
+
+
+		for (int index =0; index<tripsWithArrivalTime.size(); index++){
+
+			String line = tripsWithArrivalTime.get(index);
+
+			//trip_id,arrival_time,departure_time,stop_id,stop_sequence,stop_headsign,pickup_type,drop_off_type,shape_dist_tra
+
+			String outputString = "Trip ID: " + line.split("\\,")[0] + ", Arrival Time: " + line.split("\\,")[1] + ", DepartureTime: " +
+			line.split("\\,")[2] + ", Stop ID: " + line.split("\\,")[3] + ", Stop sequence: "  + line.split("\\,") [4] + ", Stop headsign: " + line.split("\\,") [5] 
+			+ ", Pickup Type: " + line.split("\\,") [6] + ", Drop off type: "  + line.split("\\,") [7];
+
+			if (line.split("\\,").length == 8){
+
+				output.add(outputString);
+			}
+
+			else {
+				outputString += ", Distance: " + line.split("\\,")[8];
+				output.add(outputString);
+			}
+		}
+
+		return output;
+
+
+
+		
+
+
 	}
 
 
@@ -149,10 +190,17 @@ public class TripTwo {
 		TripTwo t2 = new TripTwo("stop_times.txt");
 
 
-		for (int index =0; index<t2.findTripsWithArrivalTime("23:51:11").size(); index++){
-			System.out.println(t2.findTripsWithArrivalTime("23:51:11").get(index));
+		for (int index =0; index<t2.findTripsWithArrivalTime("5:25:00").size(); index++){
+
+
+			System.out.println(t2.findTripsWithArrivalTime("5:25:00").get(index));
 		}
 
+
+	
+
+
+	
 
 	}
 }
