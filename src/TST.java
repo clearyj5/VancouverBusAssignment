@@ -2,14 +2,14 @@ import java.security.Key;
 import java.util.*;
 import java.io.*;
 
-public class TST<Value> {
+public class TST {
     private int size; // size
-    private Node<Value> root; // root of TST
+    private Node<String> root; // root of TST
 
-    private static class Node<Value> {
+    private static class Node<String> {
         private char c; // Character
-        private Node<Value> left, mid, right; // Subtries
-        private Value val;
+        private Node<String> left, mid, right; // Subtries
+        private String val;
     }
 
     /**
@@ -34,18 +34,18 @@ public class TST<Value> {
      *         table and {@code null} if the key is not in the symbol table
      * @throws IllegalArgumentException if {@code key} is {@code null} or empty
      */
-    public Value get(String key) {
+    public String get(String key) {
         if (key == null) {
             throw new IllegalArgumentException("Calling get() with a null argument");
         } else if (key.length() == 0) {
             throw new IllegalArgumentException("Key must be of lentgh >=1");
         }
-        Node<Value> x = get(root, key, 0);
+        Node<String> x = get(root, key, 0);
         return x == null ? null : x.val;
     }
 
     // Return subtrie corresponding to given key
-    public Node<Value> get(Node<Value> x, String key, int d) {
+    public Node<String> get(Node<String> x, String key, int d) {
 
         if (x == null)
             return null;
@@ -74,7 +74,7 @@ public class TST<Value> {
      * @param val the value
      * @throws IllegalArgumentException if {@code key} is {@code null}
      */
-    public void put(Value val, String key) {
+    public void put(String val, String key) {
         if (val == null) {
             throw new IllegalArgumentException("calls put() with null key");
         }
@@ -85,7 +85,7 @@ public class TST<Value> {
         }
     }
 
-    private Node<Value> put(Node<Value> x, String key, Value val, int d) {
+    private Node<String> put(Node<String> x, String key, String val, int d) {
         char c = key.charAt(d);
         if (x == null) {
             x = new Node<>();
@@ -111,14 +111,14 @@ public class TST<Value> {
      *         list
      * @throws IllegalArgumentException if {@code prefix} is {@code null}
      */
-    public List<Value> valuesWithPrefix(String prefix) {
+    public List<String> valuesWithPrefix(String prefix) {
         if (prefix == null) {
             throw new IllegalArgumentException("Calls valuesWithPrefix() with null argument");
         }
 
-        List<Value> values = new ArrayList<>();
+        List<String> values = new ArrayList<>();
 
-        Node<Value> x = get(root, prefix, 0);
+        Node<String> x = get(root, prefix, 0);
 
         if (x == null) {
             return values;
@@ -131,7 +131,7 @@ public class TST<Value> {
     }
 
     // All values in subtrie rooted at x with given prefix
-    public void collect(Node<Value> x, StringBuilder prefix, List<Value> values) {
+    public void collect(Node<String> x, StringBuilder prefix, List<String> values) {
         if (x == null)
             return;
         collect(x.left, prefix, values);
@@ -141,24 +141,10 @@ public class TST<Value> {
         prefix.deleteCharAt(prefix.length() - 1);
         collect(x.right, prefix, values);
     }
-
  
     public static void main(String[] args) {
-        ReadFile keyValueFile = new ReadFile();
-        File stopInfo = new File("stops.txt");
 
-        String[] keyArray = keyValueFile.keyArray(stopInfo);
-        String[] valueArray = keyValueFile.valueArray(stopInfo);
-
-        for (int i = 0; i < 8758; i++) {
-            String currentKey;
-            currentKey = keyArray[i];
-            
-            String currentValue;
-            currentValue = valueArray[i];
-
-            put( currentValue, currentKey);
         
         }
     }
-}
+
