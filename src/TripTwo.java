@@ -82,21 +82,68 @@ public class TripTwo {
 
 		ArrayList<String> tripsWithArrivalTime = new ArrayList<String>();
 
+		String noBusError = "No buses depart at the specified time";
+		String invalidInputError = "the input '" + arrivalTime + "' is not a valid time";
+
 		if (isValidTime(arrivalTime)){
 
 			if (tripDataSet.containsKey(arrivalTime)){
 				tripsWithArrivalTime = tripDataSet.get(arrivalTime);
 				 sortByID(tripsWithArrivalTime);
 			} else {
-				tripsWithArrivalTime.add("No buses depart at the specified time");
+				tripsWithArrivalTime.add(noBusError);
 			}
 		}
 
 		else {
-			tripsWithArrivalTime.add("the input '" + arrivalTime + "' is not a valid time" );
+			tripsWithArrivalTime.add(invalidInputError);
 		}
-		return tripsWithArrivalTime;
+
+		if(tripsWithArrivalTime.contains(noBusError) || tripsWithArrivalTime.contains(invalidInputError)){
+			return tripsWithArrivalTime;
+		}
+		else{
+		return formatOutput(tripsWithArrivalTime, arrivalTime);
+		}
 	}
+
+
+	public ArrayList<String> formatOutput(ArrayList<String> tripsWithArrivalTime, String arrivalTime){
+
+		
+
+		ArrayList<String> output = new ArrayList<String>();
+
+
+		for (int index =0; index<tripsWithArrivalTime.size(); index++){
+
+			String line = tripsWithArrivalTime.get(index);
+
+			//trip_id,arrival_time,departure_time,stop_id,stop_sequence,stop_headsign,pickup_type,drop_off_type,shape_dist_tra
+
+			String outputString = "Trip ID: " + line.split("\\,")[0] + ", Arrival Time: " + line.split("\\,")[1] + ", DepartureTime: " +
+			line.split("\\,")[2] + ", Stop ID: " + line.split("\\,")[3] + ", Stop sequence: "  + line.split("\\,") [4] + ", Stop headsign: " + line.split("\\,") [5] 
+			+ ", Pickup Type: " + line.split("\\,") [6] + ", Drop off type: "  + line.split("\\,") [7];
+
+			if (line.split("\\,").length == 8){
+
+				output.add(outputString);
+			}
+
+			else {
+				outputString += ", Distance: " + line.split("\\,")[8];
+				output.add(outputString);
+			}
+		}
+
+		return output;
+
+
+	}
+		
+
+
+	
 
 
     //using insertion sort
@@ -149,10 +196,17 @@ public class TripTwo {
 		TripTwo t2 = new TripTwo("stop_times.txt");
 
 
-		for (int index =0; index<t2.findTripsWithArrivalTime("23:51:11").size(); index++){
-			System.out.println(t2.findTripsWithArrivalTime("23:51:11").get(index));
+		for (int index =0; index<t2.findTripsWithArrivalTime("5:25:00").size(); index++){
+
+
+			System.out.println(t2.findTripsWithArrivalTime("5:25:00").get(index));
 		}
 
+
+	
+
+
+	
 
 	}
 }

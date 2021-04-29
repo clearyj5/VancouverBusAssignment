@@ -3,7 +3,6 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.ImageIcon; 
 import java.util.ArrayList;
-import java.io.*;
 import java.util.*;
 
 
@@ -50,7 +49,7 @@ public class VancouverBusSystem {
         {"Please choose an option", 
         "1. Find the shortest path between two stops", 
         "2. Find bus stop by full name", 
-        "3. Find all the trips of a given duration"}; 
+        "3. Find all trips with a given departure time"}; 
 
         JFrame frame = new JFrame();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -65,7 +64,7 @@ public class VancouverBusSystem {
 
           frame, 
           "Which of Our Services Would You Like To Use? Select an Option From The Dropdown Menu", 
-          "*Vancouver Bus Service", 
+          "Vancouver Bus Service", 
           JOptionPane.WARNING_MESSAGE, 
 
           null, 
@@ -95,10 +94,8 @@ public class VancouverBusSystem {
                   }
                 JOptionPane.showMessageDialog(frame, resultstopInfo);
                   break;
-              case "3. Find all the trips of a given duration":
-                String timeByUser = JOptionPane.showInputDialog("Please enter the durtion of your trip in a hh:mm::ss format: ");
-                //boolean isTimeValid = _isGivenTimeValid(timeByUser);
-                //if(isTimeValid) {
+              case "3. Find all trips with a given departure time":
+                String timeByUser = JOptionPane.showInputDialog("Please enter the time you wish to depart in the format 'hh:mm:ss");
                   ArrayList<String> arrivalTime = tt.findTripsWithArrivalTime(timeByUser);
                   String resultToShow = "";
                   for(String s : arrivalTime) {
@@ -123,22 +120,11 @@ public class VancouverBusSystem {
     public static void main(String[] args) throws Exception {
         System.out.println("Welcome to Vancouver Bus System");
         TripTwo t2 = new TripTwo("stop_times.txt");
-/*
-		for (int index =0; index<t2.findTripsWithArrivalTime("23:51:48").size(); index++){
-			System.out.println(t2.findTripsWithArrivalTime("23:51:48").get(index));
-		}
-    /*/
+
         VancouverBusSystem v = new VancouverBusSystem();
         v.showMenu(t2);
 
-/*
-        TripTwo tester= new TripTwo("stop_times.txt");
-          
 
-
-         }
-
-*/
          
          
         }
