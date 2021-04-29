@@ -6,7 +6,6 @@ import java.util.Scanner;
 
 public class TripTwo {
 
-
 	public static HashMap<String, ArrayList<String>> tripDataSet = new HashMap<String,ArrayList<String>>();  
 
 
@@ -87,24 +86,19 @@ public class TripTwo {
 
 			if (tripDataSet.containsKey(arrivalTime)){
 				tripsWithArrivalTime = tripDataSet.get(arrivalTime);
-
-
 				 sortByID(tripsWithArrivalTime);
-
 			} else {
 				tripsWithArrivalTime.add("No buses depart at the specified time");
 			}
 		}
 
 		else {
-			tripsWithArrivalTime.add("the time '" + arrivalTime + "' is not a valid time" );
+			tripsWithArrivalTime.add("the input '" + arrivalTime + "' is not a valid time" );
 		}
-
-
-
-
 		return tripsWithArrivalTime;
 	}
+
+
     //using insertion sort
     public void sortByID(ArrayList<String> tripsWithArrivalTime){
 
@@ -139,10 +133,6 @@ public class TripTwo {
                     tripsWithArrivalTime.set(pHolder+1, tripsWithArrivalTime.get(pHolder));
 
                     tripsWithArrivalTime.set(pHolder, line);
-
-
-
-	
 				}
 
 				pHolder++;
@@ -154,27 +144,13 @@ public class TripTwo {
 	}
 
 
-
-
-
-
-
-       
-
-
-
-
-    
-
-
-
-
 	public static void main(String[] args) {
 
 		TripTwo t2 = new TripTwo("stop_times.txt");
 
-		for (int index =0; index<t2.findTripsWithArrivalTime("23:51:48").size(); index++){
-			System.out.println(t2.findTripsWithArrivalTime("23:51:48").get(index));
+
+		for (int index =0; index<t2.findTripsWithArrivalTime("23:51:11").size(); index++){
+			System.out.println(t2.findTripsWithArrivalTime("23:51:11").get(index));
 		}
 
 
