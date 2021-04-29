@@ -119,8 +119,6 @@ public class TripTwo {
 
 			String line = tripsWithArrivalTime.get(index);
 
-			//trip_id,arrival_time,departure_time,stop_id,stop_sequence,stop_headsign,pickup_type,drop_off_type,shape_dist_tra
-
 			String outputString = "Trip ID: " + line.split("\\,")[0] + ", Arrival Time: " + line.split("\\,")[1] + ", DepartureTime: " +
 					line.split("\\,")[2] + ", Stop ID: " + line.split("\\,")[3] + ", Stop sequence: "  + line.split("\\,") [4] + ", Stop headsign: " + line.split("\\,") [5] 
 							+ ", Pickup Type: " + line.split("\\,") [6] + ", Drop off type: "  + line.split("\\,") [7];
