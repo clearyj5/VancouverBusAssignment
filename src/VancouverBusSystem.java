@@ -57,7 +57,9 @@ public class VancouverBusSystem {
         frame.setSize(420,420);
 
 
-        //ImageIcon icon = new ImageIcon("/Users/probbins/Desktop/bluebus.jpeg"); 
+        ImageIcon icon = new ImageIcon("NewBus.jpg"); 
+
+    
 
 
         String inputFromUser = (String) JOptionPane.showInputDialog(
@@ -67,7 +69,7 @@ public class VancouverBusSystem {
           "Vancouver Bus Service", 
           JOptionPane.WARNING_MESSAGE, 
 
-          null, 
+          icon, 
 
           userOptions, 
           userOptions[0]
