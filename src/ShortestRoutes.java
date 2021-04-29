@@ -1,75 +1,87 @@
+import java.util.*;
+import java.io.*;
+
 public class ShortestRoutes {
+    public double[] distTo;
+    public Edge[] lastVisited;
+    public boolean[] visited;
+    public String shortestRoute;
 
-    public double distanceTo[][];
-    public int edgeTo[][];
-    public int edge;
-    public int infinity = Integer.MAX_VALUE;
-    private double shortestDistance;
-
-    public void dijkstraShortestPath(int k) {
-
-        boolean[] checkIfPathIsShortest = new boolean[distanceTo.length];
-
-        checkIfPathIsShortest[k] = true;
-
-        while (true) {
-
-            int x = -1;
-
-            for (int i = 0; i < distanceTo.length; i++) {
-
-                if ((!checkIfPathIsShortest[i]) && distanceTo[k][i] != infinity) {
-
-                    x = i;
-                    break;
-                }
+    public ShortestRoutes(Graph graph, int source, int destination) {
+        this.distTo = new double[graph.numberOfStops];
+        this.lastVisited = new Edge[graph.numberOfStops];
+        this.visited = new boolean[graph.numberOfStops];
+        for (int i = 0; i < distTo.length; i++) {
+            distTo[i] = Double.POSITIVE_INFINITY;
+            visited[i] = false;
+        }
+        distTo[source] = 0;
+        for (int i = 0; i < graph.numberOfStops - 1; i++) {
+            int vertex = minimumDistance(distTo, visited);
+            if (vertex < 0) {
+                continue;
             }
+            visited[vertex] = true;
+            for (Edge edge : graph.adjEdges.get(vertex))
+                relax(edge);
+        }
 
-            if (x == -1) {
+        this.shortestRoute = findShortestRoute(source, destination);
+    }
 
-                return;
+    public int minimumDistance(double[] distTo, boolean[] visited) {
+        double min = Double.MAX_VALUE;
+        int index = -1;
+        for (int i = 0; i < visited.length; i++) {
+            if (!visited[i] && distTo[i] <= min) {
+                min = distTo[i];
+                index = i;
             }
+        }
+        return index;
+    }
 
-            checkIfPathIsShortest[x] = true;
-
-            for (int i = 0; i < distanceTo.length; i++) {
-
-                if (distanceTo[k][x] + distanceTo[x][i] < distanceTo[k][i]) {
-
-                    distanceTo[k][i] = distanceTo[k][x] + distanceTo[x][i];
-
-                    checkIfPathIsShortest[i] = false;
-                    edgeTo[k][i] = x;
-
-                }
-            }
+    public void relax(Edge edge) {
+        int fromVertex = edge.fromVertex;
+        int endVertex = edge.endVertex;
+        if (distTo[endVertex] > (distTo[fromVertex] + edge.weight)) {
+            distTo[endVertex] = distTo[fromVertex] + edge.weight;
+            lastVisited[endVertex] = edge;
         }
     }
 
-    public void findShortestRoute (String stop1, String stop2) {
-         
-        //TODO Edit sizes below
-        distanceTo = new double[amountOfStops][amountOfStops];
-        edgeTo = new int[amountOfEdges][amountOfEdges];
+    public String findShortestRoute(int stop1, int stop2) {
+        Stack<Integer> stops = new Stack<Integer>();
+        stops.push(stop2);
 
-        int s1 = -1; //Stop 1 Number
-        int s2 = -1; //Stop 2 Number
-
-        //Initializes 2D arrays setting all distances to infinity
-        for (int j = 0; j < distanceTo.length; j++) {
-            for (int k = 0; k < distanceTo[j].length; k++) {
-
-                distanceTo[j][k] = infinity;
-                if (j == k) {
-                    distanceTo[j][k] = 0;
-                }
+        while (true){
+            int temp = lastVisited[stop2].fromVertex;
+            stops.push(temp);
+            if (temp == stop1) {
+                break;
             }
         }
+        shortestRoute = ("The shortest route from " + stop1 + " to " + stop2 + " is: ");
+        while (!stops.isEmpty()){
+            shortestRoute += (stops.pop() + ",\n");
+        }
 
-        dijkstraShortestPath(s1);
+        return shortestRoute;
+    }
 
-        shortestDistance = distanceTo[s1][s2];
+    public static void main(String args[]){
+        String file1 = "stops.txt";
+        String file2 = "stop_times.txt";
+        String file3 = "transfers.txt";
+
+        int stop1 = 1885;
+        int stop2 = 1866;
         
+        Graph graph = new Graph(file1, file2, file3);
 
+        ShortestRoutes s = new ShortestRoutes(graph, stop1, stop2);
+
+        System.out.println(s.shortestRoute);
+        System.out.println(s.distTo);        
     }
 }

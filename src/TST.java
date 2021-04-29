@@ -142,7 +142,6 @@ public class TST<Value> {
         collect(x.right, prefix, values);
     }
 
- 
     public static void main(String[] args) {
         ReadFile keyValueFile = new ReadFile();
         File stopInfo = new File("stops.txt");
@@ -153,12 +152,12 @@ public class TST<Value> {
         for (int i = 0; i < 8758; i++) {
             String currentKey;
             currentKey = keyArray[i];
-            
+
             String currentValue;
             currentValue = valueArray[i];
 
-            put( currentValue, currentKey);
-        
+            put(currentValue, currentKey);
+
         }
     }
 }

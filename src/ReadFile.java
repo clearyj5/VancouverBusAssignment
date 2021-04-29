@@ -45,9 +45,9 @@ public class ReadFile {
   }
 
   /*
-  *Edits the position of the words in the keys
-  *by turning the strings into an element in an array and moving it
-  */
+   * Edits the position of the words in the keys by turning the strings into an
+   * element in an array and moving it
+   */
   public String editString(String string) {
     int index = string.indexOf("WB");
     String[] aux = string.split(" ");

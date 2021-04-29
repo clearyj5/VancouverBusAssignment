@@ -6,30 +6,25 @@ import java.util.Scanner;
 
 public class TripTwo {
 
+	public static HashMap<String, ArrayList<String>> tripDataSet = new HashMap<String, ArrayList<String>>();
 
-	public static HashMap<String, ArrayList<String>> tripDataSet = new HashMap<String,ArrayList<String>>();  
+	TripTwo(String filename) {
 
-
-	TripTwo(String filename){
-
-		try{
+		try {
 			Scanner inputScanner = new Scanner(new File(filename));
 			inputScanner.nextLine();
 
-
-			while (inputScanner.hasNextLine()){
+			while (inputScanner.hasNextLine()) {
 
 				String info = inputScanner.nextLine();
-				String time = info.split("\\,") [1];
+				String time = info.split("\\,")[1];
 				time = time.trim();
 
+				if (isValidTime(time)) {
 
-				if (isValidTime(time)){
-
-					if (tripDataSet.containsKey(time)){
+					if (tripDataSet.containsKey(time)) {
 						tripDataSet.get(time).add(info);
-					}
-					else{
+					} else {
 
 						ArrayList<String> infoArray = new ArrayList<String>();
 						infoArray.add(info);
@@ -40,56 +35,49 @@ public class TripTwo {
 			}
 			inputScanner.close();
 
-		} catch (FileNotFoundException e)
-		{
+		} catch (FileNotFoundException e) {
 		}
 
 	}
 
+	public boolean isValidTime(String time) {
 
+		try {
 
-
-
-	public boolean isValidTime(String time){
-
-		try{
-
-			String hour = time.split("\\:") [0];
-			String minute =time.split("\\:")[1];
+			String hour = time.split("\\:")[0];
+			String minute = time.split("\\:")[1];
 			String second = time.split("\\:")[2];
 
 			hour = hour.trim();
 			minute = minute.trim();
 			second = second.trim();
 
-			if (Integer.parseInt(hour) < 24 && Integer.parseInt(hour)>=0){
-				if (Integer.parseInt(minute)<60 && Integer.parseInt(minute)>=0){
-					if (Integer.parseInt(second) <60 && Integer.parseInt(second)>=0){
+			if (Integer.parseInt(hour) < 24 && Integer.parseInt(hour) >= 0) {
+				if (Integer.parseInt(minute) < 60 && Integer.parseInt(minute) >= 0) {
+					if (Integer.parseInt(second) < 60 && Integer.parseInt(second) >= 0) {
 						return true;
 					}
 
 				}
 			}
 
-		} catch (Exception e){
+		} catch (Exception e) {
 			return false;
 		}
 
 		return false;
 	}
 
-
-	public ArrayList<String> findTripsWithArrivalTime(String arrivalTime){
+	public ArrayList<String> findTripsWithArrivalTime(String arrivalTime) {
 
 		ArrayList<String> tripsWithArrivalTime = new ArrayList<String>();
 
-		if (isValidTime(arrivalTime)){
+		if (isValidTime(arrivalTime)) {
 
-			if (tripDataSet.containsKey(arrivalTime)){
+			if (tripDataSet.containsKey(arrivalTime)) {
 				tripsWithArrivalTime = tripDataSet.get(arrivalTime);
 
-
-				 sortByID(tripsWithArrivalTime);
+				sortByID(tripsWithArrivalTime);
 
 			} else {
 				tripsWithArrivalTime.add("No buses depart at the specified time");
@@ -97,86 +85,62 @@ public class TripTwo {
 		}
 
 		else {
-			tripsWithArrivalTime.add("the time '" + arrivalTime + "' is not a valid time" );
+			tripsWithArrivalTime.add("the time '" + arrivalTime + "' is not a valid time");
 		}
-
-
-
 
 		return tripsWithArrivalTime;
 	}
-    //using insertion sort
-    public void sortByID(ArrayList<String> tripsWithArrivalTime){
 
-        int[] IDArray = new int[tripsWithArrivalTime.size()];
+	// using insertion sort
+	public void sortByID(ArrayList<String> tripsWithArrivalTime) {
 
+		int[] IDArray = new int[tripsWithArrivalTime.size()];
 
-    for (int index =0; index<tripsWithArrivalTime.size(); index++){
+		for (int index = 0; index < tripsWithArrivalTime.size(); index++) {
 
-        String id = tripsWithArrivalTime.get(index).split("\\,")[0];
-        id = id.trim();
-        int idN = Integer.parseInt(id);
+			String id = tripsWithArrivalTime.get(index).split("\\,")[0];
+			id = id.trim();
+			int idN = Integer.parseInt(id);
 
-        IDArray[index] = idN;
-    }
+			IDArray[index] = idN;
+		}
 
-		int pHolder =0;  
+		int pHolder = 0;
 
-		for (int counter =0; counter<IDArray.length; counter++) {
+		for (int counter = 0; counter < IDArray.length; counter++) {
 
 			pHolder = 0;
 
 			do {
 
-				if (IDArray[pHolder] > IDArray[pHolder+1]) {
+				if (IDArray[pHolder] > IDArray[pHolder + 1]) {
 
-					int tempValue = IDArray[pHolder+1];
+					int tempValue = IDArray[pHolder + 1];
 
-                    String line = tripsWithArrivalTime.get(pHolder +1);
+					String line = tripsWithArrivalTime.get(pHolder + 1);
 
-					IDArray[pHolder+1] = IDArray[pHolder];
+					IDArray[pHolder + 1] = IDArray[pHolder];
 
-                    tripsWithArrivalTime.set(pHolder+1, tripsWithArrivalTime.get(pHolder));
+					tripsWithArrivalTime.set(pHolder + 1, tripsWithArrivalTime.get(pHolder));
 
-                    tripsWithArrivalTime.set(pHolder, line);
+					tripsWithArrivalTime.set(pHolder, line);
 
-
-
-	
 				}
 
 				pHolder++;
 			} while (pHolder + 1 != IDArray.length);
 
 		}
-	
 
 	}
-
-
-
-
-
-
-
-       
-
-
-
-
-    
-
-
-
 
 	public static void main(String[] args) {
 
 		TripTwo t2 = new TripTwo("stop_times.txt");
 
-		for (int index =0; index<t2.findTripsWithArrivalTime("23:51:48").size(); index++){
+		for (int index = 0; index < t2.findTripsWithArrivalTime("23:51:48").size(); index++) {
 			System.out.println(t2.findTripsWithArrivalTime("23:51:48").get(index));
 		}
-
 
 	}
 }
