@@ -124,9 +124,6 @@ public class VancouverBusSystem {
         VancouverBusSystem v = new VancouverBusSystem();
         v.showMenu(t2);
 
-
-         
-         
         }
       }
 
