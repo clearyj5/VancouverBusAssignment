@@ -82,29 +82,35 @@ public class TripTwo {
 
 		ArrayList<String> tripsWithArrivalTime = new ArrayList<String>();
 
+		String noBusError = "No buses depart at the specified time";
+		String invalidInputError = "the input '" + arrivalTime + "' is not a valid time";
+
 		if (isValidTime(arrivalTime)){
 
 			if (tripDataSet.containsKey(arrivalTime)){
 				tripsWithArrivalTime = tripDataSet.get(arrivalTime);
 				 sortByID(tripsWithArrivalTime);
 			} else {
-				tripsWithArrivalTime.add("No buses depart at the specified time");
+				tripsWithArrivalTime.add(noBusError);
 			}
 		}
 
 		else {
-			tripsWithArrivalTime.add("the input '" + arrivalTime + "' is not a valid time" );
+			tripsWithArrivalTime.add(invalidInputError);
 		}
+
+		if(tripsWithArrivalTime.contains(noBusError) || tripsWithArrivalTime.contains(invalidInputError)){
+			return tripsWithArrivalTime;
+		}
+		else{
 		return formatOutput(tripsWithArrivalTime, arrivalTime);
+		}
 	}
 
 
 	public ArrayList<String> formatOutput(ArrayList<String> tripsWithArrivalTime, String arrivalTime){
 
-		if (tripsWithArrivalTime.get(0).equals("No buses depart at the specified time") || 
-		tripsWithArrivalTime.equals("the input '" + arrivalTime + "' is not a valid time" )){
-			return tripsWithArrivalTime;
-		}
+		
 
 		ArrayList<String> output = new ArrayList<String>();
 
@@ -133,11 +139,11 @@ public class TripTwo {
 		return output;
 
 
-
+	}
 		
 
 
-	}
+	
 
 
     //using insertion sort
