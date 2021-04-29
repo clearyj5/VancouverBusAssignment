@@ -89,7 +89,7 @@ public class TripTwo {
 
 			if (tripDataSet.containsKey(arrivalTime)){
 				tripsWithArrivalTime = tripDataSet.get(arrivalTime);
-				 sortByID(tripsWithArrivalTime);
+				sortByID(tripsWithArrivalTime);
 			} else {
 				tripsWithArrivalTime.add(noBusError);
 			}
@@ -103,14 +103,14 @@ public class TripTwo {
 			return tripsWithArrivalTime;
 		}
 		else{
-		return formatOutput(tripsWithArrivalTime, arrivalTime);
+			return formatOutput(tripsWithArrivalTime, arrivalTime);
 		}
 	}
 
 
 	public ArrayList<String> formatOutput(ArrayList<String> tripsWithArrivalTime, String arrivalTime){
 
-		
+
 
 		ArrayList<String> output = new ArrayList<String>();
 
@@ -122,8 +122,8 @@ public class TripTwo {
 			//trip_id,arrival_time,departure_time,stop_id,stop_sequence,stop_headsign,pickup_type,drop_off_type,shape_dist_tra
 
 			String outputString = "Trip ID: " + line.split("\\,")[0] + ", Arrival Time: " + line.split("\\,")[1] + ", DepartureTime: " +
-			line.split("\\,")[2] + ", Stop ID: " + line.split("\\,")[3] + ", Stop sequence: "  + line.split("\\,") [4] + ", Stop headsign: " + line.split("\\,") [5] 
-			+ ", Pickup Type: " + line.split("\\,") [6] + ", Drop off type: "  + line.split("\\,") [7];
+					line.split("\\,")[2] + ", Stop ID: " + line.split("\\,")[3] + ", Stop sequence: "  + line.split("\\,") [4] + ", Stop headsign: " + line.split("\\,") [5] 
+							+ ", Pickup Type: " + line.split("\\,") [6] + ", Drop off type: "  + line.split("\\,") [7];
 
 			if (line.split("\\,").length == 8){
 
@@ -140,26 +140,26 @@ public class TripTwo {
 
 
 	}
-		
 
 
-	
 
 
-    //using insertion sort
-    public void sortByID(ArrayList<String> tripsWithArrivalTime){
-
-        int[] IDArray = new int[tripsWithArrivalTime.size()];
 
 
-    for (int index =0; index<tripsWithArrivalTime.size(); index++){
+	//using insertion sort
+	public void sortByID(ArrayList<String> tripsWithArrivalTime){
 
-        String id = tripsWithArrivalTime.get(index).split("\\,")[0];
-        id = id.trim();
-        int idN = Integer.parseInt(id);
+		int[] IDArray = new int[tripsWithArrivalTime.size()];
 
-        IDArray[index] = idN;
-    }
+
+		for (int index =0; index<tripsWithArrivalTime.size(); index++){
+
+			String id = tripsWithArrivalTime.get(index).split("\\,")[0];
+			id = id.trim();
+			int idN = Integer.parseInt(id);
+
+			IDArray[index] = idN;
+		}
 
 		int pHolder =0;  
 
@@ -173,20 +173,20 @@ public class TripTwo {
 
 					int tempValue = IDArray[pHolder+1];
 
-                    String line = tripsWithArrivalTime.get(pHolder +1);
+					String line = tripsWithArrivalTime.get(pHolder +1);
 
 					IDArray[pHolder+1] = IDArray[pHolder];
 
-                    tripsWithArrivalTime.set(pHolder+1, tripsWithArrivalTime.get(pHolder));
+					tripsWithArrivalTime.set(pHolder+1, tripsWithArrivalTime.get(pHolder));
 
-                    tripsWithArrivalTime.set(pHolder, line);
+					tripsWithArrivalTime.set(pHolder, line);
 				}
 
 				pHolder++;
 			} while (pHolder + 1 != IDArray.length);
 
 		}
-	
+
 
 	}
 
@@ -198,15 +198,14 @@ public class TripTwo {
 
 		for (int index =0; index<t2.findTripsWithArrivalTime("5:25:00").size(); index++){
 
-
 			System.out.println(t2.findTripsWithArrivalTime("5:25:00").get(index));
 		}
 
 
-	
 
 
-	
+
+
 
 	}
 }
