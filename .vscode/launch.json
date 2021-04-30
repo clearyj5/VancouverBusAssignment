@@ -9,6 +9,13 @@
             "name": "Launch VancouverBusSystem",
             "request": "launch",
             "mainClass": "VancouverBusSystem",
+            "projectName": "VancouverBusAssignment_91bf2370"
+        },
+        {
+            "type": "java",
+            "name": "Launch VancouverBusSystem",
+            "request": "launch",
+            "mainClass": "VancouverBusSystem",
             "projectName": "VancouverBusAssignment_9e89bcda"
         },
         {
