@@ -1,6 +1,4 @@
-import java.security.Key;
 import java.util.*;
-
 
 public class TST {
     private int size; // size
@@ -50,9 +48,9 @@ public class TST {
         if (x == null)
             return null;
 
-        if (key.length() == 0)
+        if (key.length() == 0) {
             throw new IllegalStateException("Key must be of lentgh >=1");
-
+        }
         char c = key.charAt(d);
         if (c < x.c)
             return get(x.left, key, d);
@@ -112,8 +110,13 @@ public class TST {
      * @throws IllegalArgumentException if {@code prefix} is {@code null}
      */
     public ArrayList<String> valuesWithPrefix(String prefix) {
+
         if (prefix == null) {
-            throw new IllegalArgumentException("Calls valuesWithPrefix() with null argument");
+            // throw new IllegalArgumentException("Calls valuesWithPrefix() with null
+            // argument");
+            ArrayList<String> nullEntered = new ArrayList<>();
+            nullEntered.add("The string entered was null");
+            return nullEntered;
         }
 
         ArrayList<String> values = new ArrayList<>();
@@ -125,8 +128,12 @@ public class TST {
         } else if (x.val != null) {
             values.add(x.val);
         }
-
         collect(x.mid, new StringBuilder(prefix), values);
+        if (values.get(0) == null) {
+            ArrayList<String> notRecogArrayList = new ArrayList<>();
+            notRecogArrayList.add("The stop address was not recognised");
+            return notRecogArrayList;
+        }
         return values;
     }
 
