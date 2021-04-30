@@ -64,7 +64,7 @@ public class VancouverBusSystem {
 
       JFrame frame = new JFrame();
       frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-      frame.setVisible(true);
+      frame.setVisible(false);
       frame.setSize(420, 420);
 
       ImageIcon icon = new ImageIcon("NewBus.jpg");
