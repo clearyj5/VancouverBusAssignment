@@ -64,7 +64,7 @@ public class VancouverBusSystem {
 
       JFrame frame = new JFrame();
       frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-      frame.setVisible(false);
+      frame.setVisible(true);
       frame.setSize(420, 420);
 
       ImageIcon icon = new ImageIcon("NewBus.jpg");
@@ -98,7 +98,13 @@ public class VancouverBusSystem {
           break;
         case "2. Find bus stop information by stop name":
           String stop = JOptionPane.showInputDialog("Please enter the stop name to search");
+          stop = stop.toUpperCase();
+          if (stop.equals("")){
+            //for empty entries
+            stop = "*";
+          }
           ArrayList<String> stopInfo = findStopInfo(stop);
+          
           String resultstopInfo = "";
           if(stopInfo.isEmpty()) {
             resultstopInfo = "Couldnt find a stop! Please try again";

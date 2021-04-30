@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
 
+//Function 3: Return Tripd matching time entered by user, sorted by Trip ID
+
 public class TripTwo {
 
 	public static HashMap<String, ArrayList<String>> tripDataSet = new HashMap<String, ArrayList<String>>();
