@@ -16,7 +16,7 @@ public class ReadFile {
    * @param File the stops.txt file returns the array with all the stops address
    * catches file not found error
    */
-  public ArrayList<String> keyArrayList(File file) {
+  public static ArrayList<String> keyArrayList(File file) {
     try {
 
       Scanner myReader = new Scanner(file);
@@ -42,16 +42,18 @@ public class ReadFile {
         }
         if (key[2].contains("EB ")) {
           key[2] = (editString(key[2]));
-        } 
-          keyArrayList(key[2]);
-        
+        }
+        keyArrayList(key[2]);
+
       }
       myReader.close();
     } catch (FileNotFoundException e) {
       System.out.println("An error occurred.");
       e.printStackTrace();
     }
-
+    for(int i = 0; i<keyArrayList.size();i++){
+      System.out.println(keyArrayList.get(i));
+    }
     return keyArrayList;
   }
 
@@ -77,7 +79,14 @@ public class ReadFile {
       }
       int length = aux.length - 1;
       aux[length] = temp;
-      String appended = Arrays.toString(aux);
+      // String appended = Arrays.toString(aux);
+      StringBuilder stringBuilder = new StringBuilder();
+      for (int i = 0; i < aux.length; i++) {
+        stringBuilder.append(aux[i]);
+        stringBuilder.append(" ");
+      }
+      String appended = stringBuilder.toString();
+
       return appended;
     }
 
@@ -96,7 +105,12 @@ public class ReadFile {
       }
       int length = aux.length - 1;
       aux[length] = temp;
-      String appended = Arrays.toString(aux);
+      StringBuilder stringBuilder = new StringBuilder();
+      for (int i = 0; i < aux.length; i++) {
+        stringBuilder.append(aux[i]);
+        stringBuilder.append(" ");
+      }
+      String appended = stringBuilder.toString();
       return appended;
     }
 
@@ -115,7 +129,12 @@ public class ReadFile {
       }
       int length = aux.length - 1;
       aux[length] = temp;
-      String appended = Arrays.toString(aux);
+      StringBuilder stringBuilder = new StringBuilder();
+      for (int i = 0; i < aux.length; i++) {
+        stringBuilder.append(aux[i]);
+        stringBuilder.append(" ");
+      }
+      String appended = stringBuilder.toString();
       return appended;
     }
 
@@ -134,7 +153,12 @@ public class ReadFile {
       }
       int length = aux.length - 1;
       aux[length] = temp;
-      String appended = Arrays.toString(aux);
+      StringBuilder stringBuilder = new StringBuilder();
+      for (int i = 0; i < aux.length; i++) {
+        stringBuilder.append(aux[i]);
+        stringBuilder.append(" ");
+      }
+      String appended = stringBuilder.toString();
       return appended;
     }
 
@@ -153,9 +177,15 @@ public class ReadFile {
       }
       int length = aux.length - 1;
       aux[length] = temp;
-      String appended = Arrays.toString(aux);
+      StringBuilder stringBuilder = new StringBuilder();
+      for (int i = 0; i < aux.length; i++) {
+        stringBuilder.append(aux[i]);
+        stringBuilder.append(" ");
+      }
+      String appended = stringBuilder.toString();
       return appended;
-    } else {
+    } 
+      else {
       return string;
     }
   }
@@ -183,13 +213,14 @@ public class ReadFile {
       e.printStackTrace();
     }
     // for (int i = 0; i < valueArrayList.size(); i++) {
-    //   System.out.println(valueArrayList.get(i));
+    // System.out.println(valueArrayList.get(i));
     // }
     return valueArrayList;
   }
 
   public static void main(String[] args) {
-
+    File stopInfo = new File("stops.txt");
+    keyArrayList(stopInfo);
   }
 
 }
