@@ -3,6 +3,7 @@ import javax.swing.JOptionPane;
 import javax.swing.ImageIcon;
 import java.util.ArrayList;
 import java.util.*;
+import java.io.*;
 
 //most up to date
 public class VancouverBusSystem {
@@ -15,22 +16,25 @@ public class VancouverBusSystem {
   }
 
   public ArrayList<String> findStopInfo(String stop) {
+    ReadFile keyValueFile = new ReadFile();
+    TST tst = new TST();
+    File stopInfo = new File("stops.txt");
 
-    /*
-     * Searching for a bus stop by full name or by the first few characters in the
-     * name, using a ternary search tree (TST), returning the full stop information
-     * for each stop matching the search criteria (which can be zero, one or more
-     * stops) In order for this to provide meaningful search functionality please
-     * move keywords flagstop, wb, nb, sb, eb from start of the names to the end of
-     * the names of the stops when reading the file into a TST (eg “WB HASTINGS ST
-     * FS HOLDOM AVE” becomes “HASTINGS ST FS HOLDOM AVE WB”)
-     * 
-     * -> trie(DST) key is names of the stops, value is the description
-     */
+    ArrayList<String> keyArrayList = keyValueFile.keyArrayList(stopInfo);
+    ArrayList<String> valueArrayList = keyValueFile.valueArrayList(stopInfo);
 
+    for (int j = 0; j < keyArrayList.size(); j++) {
+        String currentKey;
+        currentKey = keyArrayList.get(j);
+
+        String currentValue;
+        currentValue = valueArrayList.get(j);
+
+        tst.put(currentValue, currentKey);
+
+    }
     ArrayList<String> result = new ArrayList<String>();
-    result.add(stop);
-    // result.add(stop2);
+    result = tst.valuesWithPrefix(stop);
     return result;
 
   }
@@ -67,18 +71,29 @@ public class VancouverBusSystem {
 
           ArrayList<String> resultShortesRoute = findShortestRoute(stop1, stop2);
           String resultsshortest = "";
-          for (String s : resultShortesRoute) {
-            resultsshortest += s + "\n";
+          if(resultShortesRoute.isEmpty()) {
+            resultsshortest = "No routes found, try again";
+          } else {
+            for (String s : resultShortesRoute) {
+              resultsshortest += s + "\n";
+            }
           }
+          
+          
           JOptionPane.showMessageDialog(frame, resultsshortest);
           break;
-        case "2. Find bus stop by full name":
+        case "2. Find bus stop information by stop name":
           String stop = JOptionPane.showInputDialog("Please enter the stop name to search");
           ArrayList<String> stopInfo = findStopInfo(stop);
           String resultstopInfo = "";
+          if(stopInfo.isEmpty()) {
+            resultstopInfo = "Couldnt find a stop! Please try again";
+          } else {
+          
           for (String s : stopInfo) {
             resultstopInfo += s + "\n";
           }
+        }
           JOptionPane.showMessageDialog(frame, resultstopInfo);
           break;
         case "3. Find all trips with a given departure time":

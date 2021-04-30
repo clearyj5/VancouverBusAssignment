@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Launch VancouverBusSystem",
+            "request": "launch",
+            "mainClass": "VancouverBusSystem",
+            "projectName": "VancouverBusAssignment_9e89bcda"
+        },
+        {
+            "type": "java",
             "name": "Launch Current File",
             "request": "launch",
             "mainClass": "${file}"
