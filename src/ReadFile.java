@@ -7,7 +7,7 @@ public class ReadFile {
   public static ArrayList<String> valueArrayList = new ArrayList<String>();
   public static String[] keyWordsStrings = { "FLAGSTOP", "SB", "WB", "NB", "EB" };
 
-  public static void keyArrayList(String s) {
+  public void keyArrayList(String s) {
     keyArrayList.add(s);
   }
 
@@ -17,18 +17,17 @@ public class ReadFile {
    * @param File the stops.txt file returns the array with all the stops address
    * catches file not found error
    */
-  public static ArrayList<String> keyArrayList(File file) {
+  public ArrayList<String> keyArrayList(File file) {
     try {
 
       Scanner myReader = new Scanner(file);
 
       myReader.nextLine();
-      // int keyi = 1;
 
       while (myReader.hasNextLine()) {
-        String data = myReader.nextLine();
+        String data = myReader.nextLine().trim();
         String[] key = data.split(",");
-
+        key[2].trim();
         if (key[2].contains("WB ")) {
           key[2] = (editString(key[2]));
         }
@@ -45,15 +44,14 @@ public class ReadFile {
           key[2] = (editString(key[2]));
         }
         keyArrayList(key[2]);
-
       }
       myReader.close();
     } catch (FileNotFoundException e) {
       System.out.println("An error occurred.");
       e.printStackTrace();
     }
-    for (int i = 0; i < keyArrayList.size(); i++) {
-      System.out.println(keyArrayList.get(i));
+    for (int i = 0; i < 10; i++) {
+    System.out.println(keyArrayList.get(i));
     }
     return keyArrayList;
   }
@@ -71,52 +69,25 @@ public class ReadFile {
    * Edits the position of the words in the keys by turning the strings into an
    * element in an array and moving it
    */
-  public static String editString(String string) {
+  public String editString(String string) {
     String[] aux = string.split(" ");
     if (checksKeyWords(aux[0])) {
       String temp = aux[0];
       for (int j = 1; j < aux.length; j++) {
-      aux[j - 1] = aux[j];
+        aux[j - 1] = aux[j];
       }
       int length = aux.length - 1;
       aux[length] = temp;
       StringBuilder stringBuilder = new StringBuilder();
       for (int i = 0; i < aux.length; i++) {
-      stringBuilder.append(aux[i]);
-      stringBuilder.append(" ");
+        stringBuilder.append(aux[i]);
+        stringBuilder.append(" ");
       }
       String appended = stringBuilder.toString();
       return appended;
-    }
-    else{
+    } else {
       return string;
     }
-
-    // else if (string.contains("FLAGSTOP ")) {
-    // String[] aux = string.split(" ");
-    // int index = -1;
-    // for (int i = 0; i < aux.length; i++) {
-    // if (aux[i].equals("FLAGSTOP")) {
-    // index = i;
-    // break;
-    // }
-    // }
-    // String temp = aux[index];
-    // for (int j = 1; j < aux.length; j++) {
-    // aux[j - 1] = aux[j];
-    // }
-    // int length = aux.length - 1;
-    // aux[length] = temp;
-    // StringBuilder stringBuilder = new StringBuilder();
-    // for (int i = 0; i < aux.length; i++) {
-    // stringBuilder.append(aux[i]);
-    // stringBuilder.append(" ");
-    // }
-    // String appended = stringBuilder.toString();
-    // return appended;
-    // }
-
-
   }
 
   /*
@@ -141,15 +112,9 @@ public class ReadFile {
       System.out.println("An error occurred.");
       e.printStackTrace();
     }
-    // for (int i = 0; i < valueArrayList.size(); i++) {
-    // System.out.println(valueArrayList.get(i));
-    // }
+    for (int i = 0; i < 10; i++) {
+      System.out.println(valueArrayList.get(i));
+      }
     return valueArrayList;
   }
-
-  public static void main(String[] args) {
-    File stopInfo = new File("stops.txt");
-    keyArrayList(stopInfo);
-  }
-
 }
