@@ -46,7 +46,7 @@ public class VancouverBusSystem {
     do {
 
       String[] userOptions = { "Please choose an option", "1. Find the shortest path between two stops",
-          "2. Find bus stop by full name", "3. Find all trips with a given departure time" };
+          "2. Find bus stop information by stop name", "3. Find all trips with a given departure time" };
 
       JFrame frame = new JFrame();
       frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
