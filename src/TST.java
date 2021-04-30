@@ -111,12 +111,12 @@ public class TST {
      *         list
      * @throws IllegalArgumentException if {@code prefix} is {@code null}
      */
-    public List<String> valuesWithPrefix(String prefix) {
+    public ArrayList<String> valuesWithPrefix(String prefix) {
         if (prefix == null) {
             throw new IllegalArgumentException("Calls valuesWithPrefix() with null argument");
         }
 
-        List<String> values = new ArrayList<>();
+        ArrayList<String> values = new ArrayList<>();
 
         Node<String> x = get(root, prefix, 0);
 
