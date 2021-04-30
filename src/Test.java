@@ -22,15 +22,12 @@ public class Test {
             tst.put(currentValue, currentKey);
 
         }
-
         Scanner scan = new Scanner(System.in);
-        System.out.println("Stop name: ");
-        String search = scan.nextLine();
-        System.out.println(tst.get(search));
-
         System.out.println("Stop prefix: ");
         String prefix = scan.nextLine();
-        System.out.println(tst.valuesWithPrefix(prefix));
+        for (String element : tst.valuesWithPrefix(prefix)) {
+            System.out.println(element);
+        }
 
     }
 }
