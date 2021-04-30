@@ -9,10 +9,24 @@ import java.io.*;
 public class VancouverBusSystem {
 
   public ArrayList<String> findShortestRoute(String stop1, String stop2) {
-    ArrayList<String> result = new ArrayList<String>(); 
-    result.add(stop1);
-    result.add(stop2);
-    return result;
+    ArrayList<String> errors = new ArrayList<String>();
+
+    try {
+      int stopOne = Integer.parseInt(stop1);
+      int stopTwo = Integer.parseInt(stop2);
+      ShortestRoutes vBusSystem = new ShortestRoutes();
+        try {
+             vBusSystem.buildBusSystem();
+             return vBusSystem.shortestRoute(stopOne, stopTwo);
+        } catch (FileNotFoundException e) {
+             errors.add("Could not build Bus System");
+             return errors;
+        }
+
+    } catch (NumberFormatException e) {
+      errors.add("The inputs entered are not valid stops.");
+      return errors;
+    }
   }
 
   public ArrayList<String> findStopInfo(String stop) {
