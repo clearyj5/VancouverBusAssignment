@@ -23,12 +23,6 @@ public class Test {
 
         }
 
-        //BUG: search and prefix for stops with no editing positions works, but not for 
-        //stops that have had first part moved
-        //UPDATE ON BUG: changed readfile.editstring() method from .toString to a string builder
-        //New BUG: duplicates keywords flagstop at the end of the code
-        //eg STEVENS DR AT 500 BLOCK FLAGSTOP FLAGSTOP, where one of the flagstop should be SB
-
         Scanner scan = new Scanner(System.in);
         System.out.println("Stop name: ");
         String search = scan.nextLine();
