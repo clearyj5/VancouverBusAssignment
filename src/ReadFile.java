@@ -5,6 +5,7 @@ public class ReadFile {
 
   public static ArrayList<String> keyArrayList = new ArrayList<String>();
   public static ArrayList<String> valueArrayList = new ArrayList<String>();
+  public static String[] keyWordsStrings = { "FLAGSTOP", "SB", "WB", "NB", "EB" };
 
   public static void keyArrayList(String s) {
     keyArrayList.add(s);
@@ -51,10 +52,19 @@ public class ReadFile {
       System.out.println("An error occurred.");
       e.printStackTrace();
     }
-    for(int i = 0; i<keyArrayList.size();i++){
+    for (int i = 0; i < keyArrayList.size(); i++) {
       System.out.println(keyArrayList.get(i));
     }
     return keyArrayList;
+  }
+
+  public static boolean checksKeyWords(String wordChecked) {
+    for (int i = 0; i < keyWordsStrings.length; i++) {
+      if (keyWordsStrings[i].equals(wordChecked)) {
+        return true;
+      }
+    }
+    return false;
   }
 
   /*
@@ -62,132 +72,51 @@ public class ReadFile {
    * element in an array and moving it
    */
   public static String editString(String string) {
-    if (string.contains("WB ")) {
-      // converts string to array
-      String[] aux = string.split(" ");
-      int index = -1;
-      // finds the index of WB
-      for (int i = 0; i < aux.length; i++) {
-        if (aux[i].equals("WB")) {
-          index = i;
-          break;
-        }
-      }
-      String temp = aux[index];
+    String[] aux = string.split(" ");
+    if (checksKeyWords(aux[0])) {
+      String temp = aux[0];
       for (int j = 1; j < aux.length; j++) {
-        aux[j - 1] = aux[j];
-      }
-      int length = aux.length - 1;
-      aux[length] = temp;
-      // String appended = Arrays.toString(aux);
-      StringBuilder stringBuilder = new StringBuilder();
-      for (int i = 0; i < aux.length; i++) {
-        stringBuilder.append(aux[i]);
-        stringBuilder.append(" ");
-      }
-      String appended = stringBuilder.toString();
-
-      return appended;
-    }
-
-    else if (string.contains("FLAGSTOP ")) {
-      String[] aux = string.split(" ");
-      int index = -1;
-      for (int i = 0; i < aux.length; i++) {
-        if (aux[i].equals("FLAGSTOP")) {
-          index = i;
-          break;
-        }
-      }
-      String temp = aux[index];
-      for (int j = 1; j < aux.length; j++) {
-        aux[j - 1] = aux[j];
+      aux[j - 1] = aux[j];
       }
       int length = aux.length - 1;
       aux[length] = temp;
       StringBuilder stringBuilder = new StringBuilder();
       for (int i = 0; i < aux.length; i++) {
-        stringBuilder.append(aux[i]);
-        stringBuilder.append(" ");
+      stringBuilder.append(aux[i]);
+      stringBuilder.append(" ");
       }
       String appended = stringBuilder.toString();
       return appended;
     }
-
-    else if (string.contains("NB ")) {
-      String[] aux = string.split(" ");
-      int index = -1;
-      for (int i = 0; i < aux.length; i++) {
-        if (aux[i].equals("NB")) {
-          index = i;
-          break;
-        }
-      }
-      String temp = aux[index];
-      for (int j = 1; j < aux.length; j++) {
-        aux[j - 1] = aux[j];
-      }
-      int length = aux.length - 1;
-      aux[length] = temp;
-      StringBuilder stringBuilder = new StringBuilder();
-      for (int i = 0; i < aux.length; i++) {
-        stringBuilder.append(aux[i]);
-        stringBuilder.append(" ");
-      }
-      String appended = stringBuilder.toString();
-      return appended;
-    }
-
-    else if (string.contains("SB ")) {
-      String[] aux = string.split(" ");
-      int index = -1;
-      for (int i = 0; i < aux.length; i++) {
-        if (aux[i].equals("SB")) {
-          index = i;
-          break;
-        }
-      }
-      String temp = aux[index];
-      for (int j = 1; j < aux.length; j++) {
-        aux[j - 1] = aux[j];
-      }
-      int length = aux.length - 1;
-      aux[length] = temp;
-      StringBuilder stringBuilder = new StringBuilder();
-      for (int i = 0; i < aux.length; i++) {
-        stringBuilder.append(aux[i]);
-        stringBuilder.append(" ");
-      }
-      String appended = stringBuilder.toString();
-      return appended;
-    }
-
-    else if (string.contains("EB ")) {
-      String[] aux = string.split(" ");
-      int index = -1;
-      for (int i = 0; i < aux.length; i++) {
-        if (aux[i].equals("EB")) {
-          index = i;
-          break;
-        }
-      }
-      String temp = aux[index];
-      for (int j = 1; j < aux.length; j++) {
-        aux[j - 1] = aux[j];
-      }
-      int length = aux.length - 1;
-      aux[length] = temp;
-      StringBuilder stringBuilder = new StringBuilder();
-      for (int i = 0; i < aux.length; i++) {
-        stringBuilder.append(aux[i]);
-        stringBuilder.append(" ");
-      }
-      String appended = stringBuilder.toString();
-      return appended;
-    } 
-      else {
+    else{
       return string;
     }
+
+    // else if (string.contains("FLAGSTOP ")) {
+    // String[] aux = string.split(" ");
+    // int index = -1;
+    // for (int i = 0; i < aux.length; i++) {
+    // if (aux[i].equals("FLAGSTOP")) {
+    // index = i;
+    // break;
+    // }
+    // }
+    // String temp = aux[index];
+    // for (int j = 1; j < aux.length; j++) {
+    // aux[j - 1] = aux[j];
+    // }
+    // int length = aux.length - 1;
+    // aux[length] = temp;
+    // StringBuilder stringBuilder = new StringBuilder();
+    // for (int i = 0; i < aux.length; i++) {
+    // stringBuilder.append(aux[i]);
+    // stringBuilder.append(" ");
+    // }
+    // String appended = stringBuilder.toString();
+    // return appended;
+    // }
+
+
   }
 
   /*
