@@ -71,9 +71,15 @@ public class VancouverBusSystem {
 
           ArrayList<String> resultShortesRoute = findShortestRoute(stop1, stop2);
           String resultsshortest = "";
-          for (String s : resultShortesRoute) {
-            resultsshortest += s + "\n";
+          if(resultShortesRoute.isEmpty()) {
+            resultsshortest = "No routes found, try again";
+          } else {
+            for (String s : resultShortesRoute) {
+              resultsshortest += s + "\n";
+            }
           }
+          
+          
           JOptionPane.showMessageDialog(frame, resultsshortest);
           break;
         case "2. Find bus stop information by stop name":
