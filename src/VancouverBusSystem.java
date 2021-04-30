@@ -18,7 +18,6 @@ public class VancouverBusSystem {
     TST tst = new TST();
     ArrayList<String> result = new ArrayList<String>();
     result = tst.valuesWithPrefix(stop);
-    // result.add(stop2);
     return result;
   }
 
