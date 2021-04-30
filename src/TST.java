@@ -1,6 +1,6 @@
 import java.security.Key;
 import java.util.*;
-import java.io.*;
+
 
 public class TST {
     private int size; // size
@@ -141,10 +141,4 @@ public class TST {
         prefix.deleteCharAt(prefix.length() - 1);
         collect(x.right, prefix, values);
     }
- 
-    public static void main(String[] args) {
-
-        
-        }
-    }
-
+}
