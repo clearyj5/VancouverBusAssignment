@@ -1,0 +1,42 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Launch Current File",
+            "request": "launch",
+            "mainClass": "${file}"
+        },
+        {
+            "type": "java",
+            "name": "Launch ShortestRoutes",
+            "request": "launch",
+            "mainClass": "ShortestRoutes",
+            "projectName": "VancouverBusAssignment_7a2edf86"
+        },
+        {
+            "type": "java",
+            "name": "Launch SortAlgoResearch",
+            "request": "launch",
+            "mainClass": "SortAlgoResearch",
+            "projectName": "VancouverBusAssignment_7a2edf86"
+        },
+        {
+            "type": "java",
+            "name": "Launch TripTwo",
+            "request": "launch",
+            "mainClass": "TripTwo",
+            "projectName": "VancouverBusAssignment_7a2edf86"
+        },
+        {
+            "type": "java",
+            "name": "Launch VancouverBusSystem",
+            "request": "launch",
+            "mainClass": "VancouverBusSystem",
+            "projectName": "VancouverBusAssignment_7a2edf86"
+        }
+    ]
+}
