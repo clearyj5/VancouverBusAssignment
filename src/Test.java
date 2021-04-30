@@ -28,6 +28,7 @@ public class Test {
         for (String element : tst.valuesWithPrefix(prefix)) {
             System.out.println(element);
         }
+        scan.close();
 
     }
 }
