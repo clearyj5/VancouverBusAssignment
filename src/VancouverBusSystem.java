@@ -29,10 +29,9 @@ public class VancouverBusSystem {
      */
     TST tst = new TST();
     ArrayList<String> result = new ArrayList<String>();
-    result = (ArrayList<String>) tst.valuesWithPrefix(stop);
+    result = tst.valuesWithPrefix(stop);
     // result.add(stop2);
     return result;
-
   }
 
   public void showMenu(TripTwo tt) {
