@@ -11,7 +11,7 @@ public class Test {
         ArrayList<String> keyArrayList = keyValueFile.keyArrayList(stopInfo);
         ArrayList<String> valueArrayList = keyValueFile.valueArrayList(stopInfo);
 
-        //System.out.println(keyArrayList.size());
+        // System.out.println(keyArrayList.size());
         for (int j = 0; j < keyArrayList.size(); j++) {
             String currentKey;
             currentKey = keyArrayList.get(j);
@@ -22,6 +22,13 @@ public class Test {
             tst.put(currentValue, currentKey);
 
         }
+
+        //BUG: search and prefix for stops with no editing positions works, but not for 
+        //stops that have had first part moved
+        //UPDATE ON BUG: changed readfile.editstring() method from .toString to a string builder
+        //New BUG: duplicates keywords flagstop at the end of the code
+        //eg STEVENS DR AT 500 BLOCK FLAGSTOP FLAGSTOP, where one of the flagstop should be SB
+
         Scanner scan = new Scanner(System.in);
         System.out.println("Stop name: ");
         String search = scan.nextLine();
